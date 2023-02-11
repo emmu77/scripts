@@ -1,0 +1,19 @@
+#!bin/bash
+mkdir /home/sai/Downloads floder
+cd /home/sai/Downloads/floder
+sudo chmod -R sai:sai /home/sai/Downloads/floder
+wget https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz
+tar -zxvf OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz 
+mv jdk8u362-b09/ java8
+sudo sed -i '$a export JAVA_HOME=/opt/java8' /etc/profile
+sudo sed -i '$a export PATH=$PATH:/opt/java8/bin' /etc/profile
+source /etc/profile
+wget https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
+tar -zxvf apache-maven-3.8.7-bin.tar.gz 
+mv apache-maven-3.8.7 maven8
+sudo sed -i '$a export M2_HOME=/opt/maven8' /etc/profile
+sudo sed -i '$a export PATH=$PATH:/opt/maven8/bin' /etc/profile
+source /etc/profile
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.71/bin/apache-tomcat-9.0.71.tar.gz
+tar -zxvf apache-tomcat-9.0.71.tar.gz 
+mv apache-tomcat-9.0.71 tomcat9
