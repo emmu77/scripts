@@ -1,0 +1,207 @@
+---
+  - hosts: all
+    become: yes
+    tasks:
+      - name: create a file
+        file:
+          path: /opt/sai
+          state: directory
+      - name: java
+        ansible.builtin.get_url:
+          url: https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz
+          dest: /opt
+          mode: '0440'
+      - name: maven
+        ansible.builtin.get_url:
+          url: https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
+          dest: /opt
+          mode: '0440'
+      - name: tomcat
+        ansible.builtin.get_url:
+          url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.71/bin/apache-tomcat-9.0.71.tar.gz
+          dest: /opt
+          mode: '0440'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+  - hosts: all
+    become: yes
+    tasks:
+      - name: create a file
+        file:
+          path: /opt/sai
+          state: directory
+      - name: java
+        ansible.builtin.get_url:
+          url: https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz
+          dest: /opt
+          mode: '0440'
+      - name: maven
+        ansible.builtin.get_url:
+          url: https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
+          dest: /opt
+          mode: '0440'
+      - name: tomcat
+        ansible.builtin.get_url:
+          url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.71/bin/apache-tomcat-9.0.71.tar.gz
+          dest: /opt
+          mode: '0440'
+      - name: untar java
+        ansible.builtin.unarchive:
+          src: /opt/OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz
+          dest: /opt
+          remote_src: yes
+      - name: untar maven
+        ansible.builtin.unarchive:
+          src: /opt/apache-maven-3.8.7-bin.tar.gz
+          dest: /opt
+          remote_src: yes
+      - name: Extract foo.tgz into /var/lib/foo
+        ansible.builtin.unarchive:
+          src: /opt/apache-tomcat-9.0.71.tar.gz
+          dest: /opt
+          remote_src: yes
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+     ---
+  - hosts: all
+    become: yes
+    tasks:
+      - name: create a file
+        file:
+          path: /opt/sai
+          state: directory
+      - name: java
+        ansible.builtin.get_url:
+          url: https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u362-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz
+          dest: /opt
+          mode: '0440'
+      - name: maven
+        ansible.builtin.get_url:
+          url: https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
+          dest: /opt
+          mode: '0440'
+      - name: tomcat
+        ansible.builtin.get_url:
+          url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.71/bin/apache-tomcat-9.0.71.tar.gz
+          dest: /opt
+          mode: '0440'
+      - name: untar java
+        ansible.builtin.unarchive:
+          src: /opt/OpenJDK8U-jdk_x64_linux_hotspot_8u362b09.tar.gz
+          dest: /opt
+          remote_src: yes
+      - name: untar maven
+        ansible.builtin.unarchive:
+          src: /opt/apache-maven-3.8.7-bin.tar.gz
+          dest: /opt
+          remote_src: yes
+      - name: untar tomcat
+        ansible.builtin.unarchive:
+          src: /opt/apache-tomcat-9.0.71.tar.gz
+          dest: /opt
+          remote_src: yes
+      - name: remove tar file
+        shell:
+          cmd: rm -rf *.tar.gz
+          chdir: /opt
+      - name: rename maven
+        shell:
+          cmd: mv apache-maven-3.8.7 maven9
+          chdir: /opt
+      - name: rename tomcat
+        shell:
+          cmd: mv apache-tomcat-9.0.71 tomcat9
+          chdir: /opt
+      - name: rename java
+        shell:
+          cmd: mv jdk8u362-b09 java3
+          chdir: /opt
+      - name: sed command for java
+        shell: sed -i '$a export JAVA_HOME=/opt/java8' /etc/profile sed -i '$a export PATH=$PATH:/opt/java8/bin' /etc/profile
+
+
